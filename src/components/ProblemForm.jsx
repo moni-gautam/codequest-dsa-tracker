@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { addProblem } from "../services/problemService";
 
 function ProblemForm({ problems, setProblems }) {
   const [title, setTitle] = useState("");
@@ -6,20 +7,20 @@ function ProblemForm({ problems, setProblems }) {
   const [topic, setTopic] = useState("");
   const [platform, setPlatform] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!title.trim()) return;
 
-    const newProblem = {
-      id: Date.now(),
-      title,
-      difficulty,
-      topic,
-      platform,
-    };
+  const newProblem = {
+  title,
+  difficulty,
+  topic,
+  platform,
+};
+  setProblems([...problems, newProblem]);
 
-    setProblems([...problems, newProblem]);
+  await addProblem(newProblem);
 
     setTitle("");
     setDifficulty("Easy");
