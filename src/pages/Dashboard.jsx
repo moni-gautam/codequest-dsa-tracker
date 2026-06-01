@@ -5,13 +5,14 @@ import ProblemList from "../components/ProblemList";
 import { useState, useEffect } from "react";
 import { getProblems } from "../services/problemService";
 import StatsCard from "../components/StatsCard";
+import DifficultyChart from "../components/DifficultyChart";
 
-function Dashboard() {
+function Dashboard({user}) {
   const [problems, setProblems] = useState([]);
 
    useEffect(() => {
   const fetchProblems = async () => {
-    const data = await getProblems();
+  const data = await getProblems(user.uid);
     setProblems(data);
   };
 
@@ -57,9 +58,16 @@ const hardCount = problems.filter(
   value={hardCount}
 />
 
+<DifficultyChart
+  easyCount={easyCount}
+  mediumCount={mediumCount}
+  hardCount={hardCount}
+/>
+
       <ProblemForm
         problems={problems}
         setProblems={setProblems}
+        user = {user}
       />
 
       <ProblemList

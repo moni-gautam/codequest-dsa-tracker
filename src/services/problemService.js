@@ -3,7 +3,9 @@ import {
   collection,
   getDocs,
   deleteDoc,
-  doc
+  doc,
+  query,
+  where
 } from "firebase/firestore";
 
 import { db } from "../firebase/firebase";
@@ -15,17 +17,19 @@ export const addProblem = async (problem) => {
   );
 };
 
-export const getProblems = async () => {
-  const snapshot = await getDocs(
-    collection(db, "problems")
+export const getProblems = async (userId) => {
+  const q = query(
+    collection(db, "problems"),
+    where("userId", "==", userId)
   );
 
+  const snapshot = await getDocs(q);
 
-return snapshot.docs.map((doc) => ({
-  ...doc.data(),
-  firestoreId: doc.id,
-}));
-}
+  return snapshot.docs.map((doc) => ({
+    ...doc.data(),
+    firestoreId: doc.id,
+  }));
+};
 
 export const deleteProblem = async (id) => {
   await deleteDoc(

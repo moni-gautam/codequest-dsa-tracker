@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { addProblem } from "../services/problemService";
 
-function ProblemForm({ problems, setProblems }) {
+function ProblemForm({ problems, setProblems ,user,}) {
   const [title, setTitle] = useState("");
   const [difficulty, setDifficulty] = useState("Easy");
   const [topic, setTopic] = useState("");
@@ -17,6 +17,7 @@ function ProblemForm({ problems, setProblems }) {
   difficulty,
   topic,
   platform,
+  userId: user.uid,
 };
   setProblems([...problems, newProblem]);
 

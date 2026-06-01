@@ -16,7 +16,9 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  return user ? <Dashboard /> : <Login />;
+  return user ?( <Dashboard user = {user} />):(
+    <Login/>
+  );
 }
 
 export default App;
