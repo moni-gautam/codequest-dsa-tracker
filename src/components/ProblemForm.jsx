@@ -1,14 +1,21 @@
 import { useState } from "react";
 
-function ProblemForm() {
-  const [problem, setProblem] = useState("");
+function ProblemForm({ problems, setProblems }) {
+  const [title, setTitle] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(problem);
+    if (!title.trim()) return;
 
-    setProblem("");
+    const newProblem = {
+      id: Date.now(),
+      title,
+    };
+
+    setProblems([...problems, newProblem]);
+
+    setTitle("");
   };
 
   return (
@@ -16,8 +23,8 @@ function ProblemForm() {
       <input
         type="text"
         placeholder="Problem Name"
-        value={problem}
-        onChange={(e) => setProblem(e.target.value)}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
       />
 
       <button type="submit">
