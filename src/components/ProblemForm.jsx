@@ -2,6 +2,9 @@ import { useState } from "react";
 
 function ProblemForm({ problems, setProblems }) {
   const [title, setTitle] = useState("");
+  const [difficulty, setDifficulty] = useState("Easy");
+  const [topic, setTopic] = useState("");
+  const [platform, setPlatform] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,21 +14,64 @@ function ProblemForm({ problems, setProblems }) {
     const newProblem = {
       id: Date.now(),
       title,
+      difficulty,
+      topic,
+      platform,
     };
 
     setProblems([...problems, newProblem]);
 
     setTitle("");
+    setDifficulty("Easy");
+    setTopic("");
+    setPlatform("");
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Add Problem</h2>
+
       <input
         type="text"
         placeholder="Problem Name"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+
+      <br />
+      <br />
+
+      <select
+        value={difficulty}
+        onChange={(e) => setDifficulty(e.target.value)}
+      >
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
+
+      <br />
+      <br />
+
+      <input
+        type="text"
+        placeholder="Topic"
+        value={topic}
+        onChange={(e) => setTopic(e.target.value)}
+      />
+
+      <br />
+      <br />
+
+      <input
+        type="text"
+        placeholder="Platform"
+        value={platform}
+        onChange={(e) => setPlatform(e.target.value)}
+      />
+
+      <br />
+      <br />
 
       <button type="submit">
         Add Problem
