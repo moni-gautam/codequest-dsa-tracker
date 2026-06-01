@@ -1,16 +1,22 @@
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+
+import { auth } from "./firebase/firebase";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+
 function App() {
-  return (
-    <div style={{ padding: "2rem" }}>
-      <h1>🚀 CodeQuest</h1>
+  const [user, setUser] = useState(null);
 
-      <h2>AI Powered DSA Progress Tracker</h2>
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
 
-      <p>
-        Track coding problems, analyze strengths and weaknesses,
-        and generate personalized revision plans.
-      </p>
-    </div>
-  );
+    return () => unsubscribe();
+  }, []);
+
+  return user ? <Dashboard /> : <Login />;
 }
 
 export default App;
