@@ -1,10 +1,10 @@
-import { deleteProblem } from "../services/problemService";
+import { deleteProblem, updateProblem } from "../services/problemService";
 
 function ProblemList({ problems }) {
-
-  const handleDelete = async (id) => {
+  const handleUpdate = async (id, difficulty) => {
     try {
-      await deleteProblem(id);
+      await updateProblem(id, difficulty);
+
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -34,10 +34,23 @@ function ProblemList({ problems }) {
               <strong>Platform:</strong> {problem.platform}
             </p>
 
-            <button
-              onClick={() => handleDelete(problem.firestoreId)}
-            >
+            <button onClick={() => handleDelete(problem.firestoreId)}>
               Delete
+            </button>
+
+            <button
+              onClick={() => {
+                const newDifficulty = prompt(
+                  "Enter new difficulty (Easy/Medium/Hard)",
+                  problem.difficulty,
+                );
+
+                if (!newDifficulty) return;
+
+                handleUpdate(problem.firestoreId, newDifficulty);
+              }}
+            >
+              Edit
             </button>
 
             <hr />

@@ -5,7 +5,8 @@ import {
   deleteDoc,
   doc,
   query,
-  where
+  where,
+  updateDoc
 } from "firebase/firestore";
 
 import { db } from "../firebase/firebase";
@@ -34,5 +35,17 @@ export const getProblems = async (userId) => {
 export const deleteProblem = async (id) => {
   await deleteDoc(
     doc(db, "problems", id)
+  );
+};
+
+export const updateProblem = async (
+  id,
+  difficulty
+) => {
+  await updateDoc(
+    doc(db, "problems", id),
+    {
+      difficulty,
+    }
   );
 };
