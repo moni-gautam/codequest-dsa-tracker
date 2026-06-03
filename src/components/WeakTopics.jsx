@@ -1,4 +1,15 @@
 function WeakTopics({ problems }) {
+  const topicTargets = {
+    Array: 50,
+    DP: 50,
+    Tree: 50,
+    Graph: 50,
+    Heap: 50,
+    Greedy: 50,
+    String: 50,
+    "Binary Search": 50,
+  };
+
   const topicCounts = {};
 
   problems.forEach((problem) => {
@@ -8,55 +19,67 @@ function WeakTopics({ problems }) {
       (topicCounts[topic] || 0) + 1;
   });
 
-  const sortedTopics = Object.entries(
-    topicCounts
-  ).sort((a, b) => a[1] - b[1]);
-
-const weakTopics = sortedTopics.slice(
-  0,
-  Math.floor(sortedTopics.length / 2)
-);
-
-const strongTopics = sortedTopics.slice(
-  Math.floor(sortedTopics.length / 2)
-).reverse();
-
   return (
     <div className="bg-slate-800 p-6 rounded-xl mb-8">
       <h2 className="text-2xl font-bold mb-6">
-        ⚠ Topic Analysis
+        🎯 Topic Mastery
       </h2>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div>
-          <h3 className="text-xl font-semibold text-red-400 mb-3">
-            Weak Topics
-          </h3>
+      <div className="space-y-5">
+        {Object.entries(topicTargets).map(
+          ([topic, target]) => {
+            const count =
+              topicCounts[topic] || 0;
 
-          {weakTopics.map(([topic, count]) => (
-            <div
-              key={topic}
-              className="bg-slate-700 p-3 rounded-lg mb-2"
-            >
-              ⚠ {topic} ({count})
-            </div>
-          ))}
-        </div>
+            const progress = Math.min(
+              (count / target) * 100,
+              100
+            );
 
-        <div>
-          <h3 className="text-xl font-semibold text-green-400 mb-3">
-            Strong Topics
-          </h3>
+            let status =
+              "⚠ Needs Work";
+            let color =
+              "bg-red-500";
 
-          {strongTopics.map(([topic, count]) => (
-            <div
-              key={topic}
-              className="bg-slate-700 p-3 rounded-lg mb-2"
-            >
-              ✅ {topic} ({count})
-            </div>
-          ))}
-        </div>
+            if (count >= target) {
+              status =
+                "✅ Mastered";
+              color =
+                "bg-green-500";
+            } else if (
+              count >= 10
+            ) {
+              status =
+                "📈 Learning";
+              color =
+                "bg-yellow-500";
+            }
+
+            return (
+              <div key={topic}>
+                <div className="flex justify-between mb-2">
+                  <span className="font-semibold text-white">
+                    {topic}
+                  </span>
+
+                  <span className="text-gray-300">
+                    {count}/{target}{" "}
+                    {status}
+                  </span>
+                </div>
+
+                <div className="w-full bg-slate-700 rounded-full h-3">
+                  <div
+                    className={`${color} h-3 rounded-full transition-all duration-500`}
+                    style={{
+                      width: `${progress}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            );
+          }
+        )}
       </div>
     </div>
   );
