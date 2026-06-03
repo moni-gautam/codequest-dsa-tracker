@@ -8,6 +8,7 @@ import DifficultyChart from "../components/DifficultyChart";
 import RevisionPlanner from "../components/RevisionPlanner";
 import TopicChart from "../components/TopicChart";
 import RevisionQueue from "../components/RevisionQueue";
+import InterviewScore from "../components/InterviewScore";
 
 function Dashboard({ user }) {
   const [problems, setProblems] = useState([]);
@@ -111,6 +112,8 @@ function Dashboard({ user }) {
           <TopicChart problems={problems} />
         </div>
       </div>
+
+      <InterviewScore problems={problems} />
 
       {/* AI Planner */}
       <RevisionPlanner problems={problems} />
