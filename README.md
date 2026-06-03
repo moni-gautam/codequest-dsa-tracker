@@ -111,3 +111,12 @@ npm run dev
 
 Built by Moni Gautam.
 
+<img width="943" height="586" alt="image" src="https://github.com/user-attachments/assets/a8a73ebc-4f0f-4677-bfd8-fe0d09d63088" />
+<img width="893" height="384" alt="image" src="https://github.com/user-attachments/assets/3a7447ee-253c-4c6c-8e98-d8b046ddb100" />
+<img width="909" height="593" alt="image" src="https://github.com/user-attachments/assets/3450f9eb-7db6-4732-80a2-41372bf4f814" />
+<img width="889" height="600" alt="image" src="https://github.com/user-attachments/assets/2147b362-f71a-4539-bd54-482fec2ab825" />
+<img width="921" height="816" alt="image" src="https://github.com/user-attachments/assets/16eec5f5-4760-4f44-9142-372b0b2051b8" />
+
+
+
+
