@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { addProblem } from "../services/problemService";
 
-function ProblemForm({ problems, setProblems ,user,}) {
+function ProblemForm({ problems, setProblems, user }) {
   const [title, setTitle] = useState("");
   const [difficulty, setDifficulty] = useState("Easy");
   const [topic, setTopic] = useState("");
@@ -12,16 +12,17 @@ function ProblemForm({ problems, setProblems ,user,}) {
 
     if (!title.trim()) return;
 
-  const newProblem = {
-  title,
-  difficulty,
-  topic,
-  platform,
-  userId: user.uid,
-};
-  setProblems([...problems, newProblem]);
+    const newProblem = {
+      title,
+      difficulty,
+      topic,
+      platform,
+      userId: user.uid,
+    };
 
-  await addProblem(newProblem);
+    setProblems([...problems, newProblem]);
+
+    await addProblem(newProblem);
 
     setTitle("");
     setDifficulty("Easy");
@@ -30,55 +31,61 @@ function ProblemForm({ problems, setProblems ,user,}) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Add Problem</h2>
+    <div className="bg-slate-800 p-6 rounded-xl shadow-lg mb-8">
+      <h2 className="text-2xl font-bold text-white mb-4">
+        Add New Problem
+      </h2>
 
-      <input
-        type="text"
-        placeholder="Problem Name"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-
-      <br />
-      <br />
-
-      <select
-        value={difficulty}
-        onChange={(e) => setDifficulty(e.target.value)}
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4"
       >
-        <option value="Easy">Easy</option>
-        <option value="Medium">Medium</option>
-        <option value="Hard">Hard</option>
-      </select>
+        <input
+          type="text"
+          placeholder="Problem Name"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full p-3 rounded-lg bg-slate-700 text-white border border-slate-600"
+        />
 
-      <br />
-      <br />
+        <select
+          value={difficulty}
+          onChange={(e) =>
+            setDifficulty(e.target.value)
+          }
+          className="w-full p-3 rounded-lg bg-slate-700 text-white border border-slate-600"
+        >
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
 
-      <input
-        type="text"
-        placeholder="Topic"
-        value={topic}
-        onChange={(e) => setTopic(e.target.value)}
-      />
+        <input
+          type="text"
+          placeholder="Topic"
+          value={topic}
+          onChange={(e) => setTopic(e.target.value)}
+          className="w-full p-3 rounded-lg bg-slate-700 text-white border border-slate-600"
+        />
 
-      <br />
-      <br />
+        <input
+          type="text"
+          placeholder="Platform"
+          value={platform}
+          onChange={(e) =>
+            setPlatform(e.target.value)
+          }
+          className="w-full p-3 rounded-lg bg-slate-700 text-white border border-slate-600"
+        />
 
-      <input
-        type="text"
-        placeholder="Platform"
-        value={platform}
-        onChange={(e) => setPlatform(e.target.value)}
-      />
-
-      <br />
-      <br />
-
-      <button type="submit">
-        Add Problem
-      </button>
-    </form>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg"
+        >
+          Add Problem
+        </button>
+      </form>
+    </div>
   );
 }
 

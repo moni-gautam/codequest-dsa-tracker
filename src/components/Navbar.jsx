@@ -1,18 +1,49 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
-function Navbar() {
+function Navbar({ user }) {
   const handleLogout = async () => {
     await signOut(auth);
   };
 
   return (
-    <nav>
-      <h2>CodeQuest</h2>
+    <nav className="flex items-center justify-between bg-slate-800 border border-slate-700 rounded-xl px-6 py-4 mb-8 shadow-lg">
+      {/* Left Side */}
+      <div>
+        <h1 className="text-3xl font-bold text-white">
+          🚀 CodeQuest
+        </h1>
 
-      <button onClick={handleLogout}>
-        Logout
-      </button>
+        <p className="text-gray-400 text-sm">
+          AI-Powered DSA Progress Tracker
+        </p>
+      </div>
+
+      {/* Right Side */}
+      <div className="flex items-center gap-4">
+        <div className="text-right">
+          <p className="font-semibold text-white">
+            {user?.displayName}
+          </p>
+
+          <p className="text-sm text-gray-400">
+            {user?.email}
+          </p>
+        </div>
+
+        <img
+          src={user?.photoURL}
+          alt="Profile"
+          className="w-12 h-12 rounded-full border-2 border-blue-500"
+        />
+
+        <button
+          onClick={handleLogout}
+          className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg font-semibold transition"
+        >
+          Logout
+        </button>
+      </div>
     </nav>
   );
 }

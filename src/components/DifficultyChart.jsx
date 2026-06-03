@@ -19,32 +19,43 @@ function DifficultyChart({
   hardCount,
 }) {
   const data = {
-    labels: [
-      "Easy",
-      "Medium",
-      "Hard",
+    labels: ["Easy", "Medium", "Hard"],
+    datasets: [
+      {
+        label: "Problems",
+        data: [
+          easyCount,
+          mediumCount,
+          hardCount,
+        ],
+        backgroundColor: [
+          "#22c55e",
+          "#f59e0b",
+          "#ef4444",
+        ],
+        borderWidth: 1,
+      },
     ],
-datasets: [
-  {
-    label: "Problems",
-    data: [
-      easyCount,
-      mediumCount,
-      hardCount,
-    ],
-    backgroundColor: [
-      "#22c55e",
-      "#f59e0b",
-      "#ef4444",
-    ],
-    borderWidth: 1,
-  },
-],
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+    },
   };
 
   return (
-    <div style={{ width: "400px" }}>
-      <Pie data={data} />
+    <div
+      style={{
+        width: "220px",
+        margin: "auto",
+      }}
+    >
+      <Pie data={data} options={options} />
     </div>
   );
 }
