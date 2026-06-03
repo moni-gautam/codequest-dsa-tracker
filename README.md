@@ -102,7 +102,6 @@ npm run dev
 * AI Revision Planner (Gemini)
 * Achievement System
 * Contest Tracker
-* Company-wise DSA Tracker
 * Mobile Responsive UI Improvements
 
 ---
