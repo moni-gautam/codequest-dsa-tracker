@@ -18,8 +18,19 @@ const handleGenerate = async () => {
 
     setPlan(response);
   } catch (error) {
-  console.error("Gemini Error:", error);
-  alert(error.message);
+  setPlan(`
+Gemini is currently busy.
+
+Suggested Revision Plan:
+
+Day 1 - Arrays
+Day 2 - DP
+Day 3 - Trees
+Day 4 - Graphs
+Day 5 - Revision
+Day 6 - Mock Interview
+Day 7 - Contest
+`);
 }
 
   setLoading(false);

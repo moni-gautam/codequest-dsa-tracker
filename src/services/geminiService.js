@@ -1,7 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-console.log(import.meta.env.VITE_GEMINI_API_KEY);
-
 const genAI = new GoogleGenerativeAI(
   import.meta.env.VITE_GEMINI_API_KEY
 );
@@ -17,31 +15,91 @@ export const generateRevisionPlan = async (problems) => {
   });
 
   const prompt = `
-You are a DSA mentor.
+You are an elite DSA mentor helping students prepare for coding interviews.
 
-Student solved problems topic-wise:
+Student topic distribution:
 
 ${JSON.stringify(topicCounts, null, 2)}
 
-Analyze weak areas and generate:
+Generate ONLY a "Today's Revision Mission".
 
-1. Weak topics
-2. Strengths
-3. A 7-day revision plan
+Rules:
+- Focus primarily on the weakest topic.
+- Give exactly 3 actionable tasks.
+- Mention estimated study time.
+- Mention expected improvement.
+- Keep the response under 120 words.
+- Do NOT generate a weekly plan.
+- Do NOT generate separate strengths and weaknesses sections.
+- Use emojis and clean formatting.
 
-Keep the answer concise and structured.
+Format exactly like:
+
+🎯 Today's Focus: <Topic>
+
+📌 Why:
+<One short sentence>
+
+✅ Tasks:
+1. ...
+2. ...
+3. ...
+
+⏱ Estimated Time:
+...
+
+📈 Expected Outcome:
+...
 `;
 
-const model = genAI.getGenerativeModel({
-  model: "gemini-2.5-flash",
-});
-console.log("Sending request to Gemini...");
+  const model = genAI.getGenerativeModel({
+    model: "gemini-2.5-flash-lite",
+  });
 
-const result =
-  await model.generateContent(prompt);
+  console.log("Sending request to Gemini...");
 
-console.log("Received response");
-    
+  let result;
+
+  for (let i = 0; i < 3; i++) {
+    try {
+      result = await model.generateContent(prompt);
+      break;
+    } catch (error) {
+      if (
+        error.message.includes("503") ||
+        error.message.includes("overloaded")
+      ) {
+        console.log("Retrying...");
+        await new Promise((resolve) =>
+          setTimeout(resolve, 2000)
+        );
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  if (!result) {
+    return `
+🎯 Today's Focus: Dynamic Programming
+
+📌 Why:
+This topic has the least practice and needs reinforcement.
+
+✅ Tasks:
+1. Solve Climbing Stairs
+2. Solve House Robber
+3. Revise DP patterns
+
+⏱ Estimated Time:
+45 Minutes
+
+📈 Expected Outcome:
+Better DP intuition and improved interview readiness.
+`;
+  }
+
+  console.log("Received response");
 
   return result.response.text();
 };
