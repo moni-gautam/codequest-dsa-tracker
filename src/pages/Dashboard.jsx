@@ -20,47 +20,38 @@ function Dashboard({ user }) {
     fetchProblems();
   }, [user]);
 
-  const easyCount = problems.filter(
-    (p) => p.difficulty === "Easy"
-  ).length;
+  const easyCount = problems.filter((p) => p.difficulty === "Easy").length;
 
-  const mediumCount = problems.filter(
-    (p) => p.difficulty === "Medium"
-  ).length;
+  const mediumCount = problems.filter((p) => p.difficulty === "Medium").length;
 
-  const hardCount = problems.filter(
-    (p) => p.difficulty === "Hard"
-  ).length;
+  const hardCount = problems.filter((p) => p.difficulty === "Hard").length;
+
+  const today = new Date().toDateString();
+
+  const solvedToday = problems.some(
+    (problem) =>
+      problem.solvedDate &&
+      new Date(problem.solvedDate).toDateString() === today,
+  );
+
+  const streak = solvedToday ? 1 : 0;
 
   return (
     <div className="min-h-screen bg-slate-900 text-white p-6">
       <Navbar user={user} />
 
-      <h1 className="text-4xl font-bold mb-8">
-        Dashboard
-      </h1>
+      <h1 className="text-4xl font-bold mb-8">Dashboard</h1>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <StatsCard
-          title="Total Problems"
-          value={problems.length}
-        />
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+        <StatsCard title="Total Problems" value={problems.length} />
 
-        <StatsCard
-          title="Easy"
-          value={easyCount}
-        />
+        <StatsCard title="Easy" value={easyCount} />
 
-        <StatsCard
-          title="Medium"
-          value={mediumCount}
-        />
+        <StatsCard title="Medium" value={mediumCount} />
 
-        <StatsCard
-          title="Hard"
-          value={hardCount}
-        />
+        <StatsCard title="Hard" value={hardCount} />
+        <StatsCard title="🔥 Streak" value={`${streak} Day`} />
       </div>
 
       {/* Analytics Section */}
@@ -79,8 +70,7 @@ function Dashboard({ user }) {
             padding: "20px",
             borderRadius: "12px",
             width: "450px",
-            boxShadow:
-              "0 4px 12px rgba(0,0,0,0.2)",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
           }}
         >
           <h2
@@ -105,8 +95,7 @@ function Dashboard({ user }) {
             borderRadius: "12px",
             width: "450px",
             height: "420px",
-            boxShadow:
-              "0 4px 12px rgba(0,0,0,0.2)",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
           }}
         >
           <h2
@@ -125,17 +114,10 @@ function Dashboard({ user }) {
       <RevisionPlanner problems={problems} />
 
       {/* Add Problem Form */}
-      <ProblemForm
-        problems={problems}
-        setProblems={setProblems}
-        user={user}
-      />
+      <ProblemForm problems={problems} setProblems={setProblems} user={user} />
 
       {/* Problem List */}
-      <ProblemList
-        problems={problems}
-        setProblems={setProblems}
-      />
+      <ProblemList problems={problems} setProblems={setProblems} />
     </div>
   );
 }

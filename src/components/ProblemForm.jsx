@@ -12,13 +12,14 @@ function ProblemForm({ problems, setProblems, user }) {
 
     if (!title.trim()) return;
 
-    const newProblem = {
-      title,
-      difficulty,
-      topic,
-      platform,
-      userId: user.uid,
-    };
+   const newProblem = {
+  title,
+  difficulty,
+  topic,
+  platform,
+  userId: user.uid,
+  solvedDate: new Date().toISOString(),
+};
 
     setProblems([...problems, newProblem]);
 
