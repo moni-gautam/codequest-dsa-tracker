@@ -59,36 +59,36 @@ export const markRevisionComplete = async (
 
   const date = new Date();
 
-  // if (revisionStage === 1) {
-  //   date.setDate(date.getDate() + 7);
+  if (revisionStage === 1) {
+    date.setDate(date.getDate() + 7);
 
-  //   nextRevision =
-  //     date.toISOString();
-  // } else if (
-  //   revisionStage === 2
-  // ) {
-  //   date.setDate(date.getDate() + 30);
+    nextRevision =
+      date.toISOString();
+  } else if (
+    revisionStage === 2
+  ) {
+    date.setDate(date.getDate() + 30);
 
-  //   nextRevision =
-  //     date.toISOString();
-  // }
- if (revisionStage === 1) {
-  date.setMinutes(
-    date.getMinutes() + 1
-  );
+    nextRevision =
+      date.toISOString();
+  }
+//  if (revisionStage === 1) {
+//   date.setMinutes(
+//     date.getMinutes() + 1
+//   );
 
-  nextRevision =
-    date.toISOString();
-} else if (
-  revisionStage === 2
-) {
-  date.setMinutes(
-    date.getMinutes() + 1
-  );
+//   nextRevision =
+//     date.toISOString();
+// } else if (
+//   revisionStage === 2
+// ) {
+//   date.setMinutes(
+//     date.getMinutes() + 1
+//   );
 
-  nextRevision =
-    date.toISOString();
-}
+//   nextRevision =
+//     date.toISOString();
+// }
 
   
 

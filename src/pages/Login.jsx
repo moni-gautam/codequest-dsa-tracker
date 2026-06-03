@@ -1,18 +1,17 @@
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signInWithRedirect, } from "firebase/auth";
 import { auth, provider } from "../firebase/firebase";
 
 function Login() {
   const handleLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-
-      console.log("Logged in:", result.user);
-
-      alert(`Welcome ${result.user.displayName}`);
-    } catch (error) {
-      console.error(error);
-      alert(error.message);
-    }
+   try {
+  await signInWithPopup(auth, provider);
+} catch (error) {
+  if (error.code === "auth/popup-blocked") {
+    await signInWithRedirect(auth, provider);
+  } else {
+    throw error;
+  }
+}
   };
 
   return (
