@@ -10,9 +10,17 @@ import TopicChart from "../components/TopicChart";
 import RevisionQueue from "../components/RevisionQueue";
 import InterviewScore from "../components/InterviewScore";
 import WeakTopics from "../components/WeakTopics";
+import Achievements from "../components/Achievements";
 
 function Dashboard({ user }) {
   const [problems, setProblems] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+const [difficultyFilter, setDifficultyFilter] = useState("All");
+
+      
+
+
+
 
   useEffect(() => {
     const fetchProblems = async () => {
@@ -38,6 +46,22 @@ function Dashboard({ user }) {
   );
 
   const streak = solvedToday ? 1 : 0;
+
+  const filteredProblems = problems.filter((problem) => {
+  const matchesSearch =
+    problem.title
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+  const matchesDifficulty =
+    difficultyFilter === "All" ||
+    problem.difficulty === difficultyFilter;
+
+  return (
+    matchesSearch &&
+    matchesDifficulty
+  );
+});
 
   return (
     <div className="min-h-screen bg-slate-900 text-white p-6">
@@ -115,6 +139,7 @@ function Dashboard({ user }) {
       </div>
 
       <InterviewScore problems={problems} />
+      <Achievements problems={problems} />
       <WeakTopics problems={problems} />
 
       {/* AI Planner */}
@@ -124,7 +149,54 @@ function Dashboard({ user }) {
       <ProblemForm problems={problems} setProblems={setProblems} user={user} />
 
       {/* Problem List */}
-      <ProblemList problems={problems} setProblems={setProblems} />
+
+      <div className="bg-slate-800 p-5 rounded-xl mb-6">
+  <h2 className="text-2xl font-bold mb-4">
+    🔍 Search & Filter
+  </h2>
+
+  <div className="flex flex-col md:flex-row gap-4">
+    <input
+      type="text"
+      placeholder="Search problems..."
+      value={searchTerm}
+      onChange={(e) =>
+        setSearchTerm(e.target.value)
+      }
+      className="flex-1 bg-slate-700 text-white p-3 rounded-lg outline-none"
+    />
+
+    <select
+      value={difficultyFilter}
+      onChange={(e) =>
+        setDifficultyFilter(
+          e.target.value
+        )
+      }
+      className="bg-slate-700 text-white p-3 rounded-lg"
+    >
+      <option value="All">
+        All Difficulties
+      </option>
+
+      <option value="Easy">
+        Easy
+      </option>
+
+      <option value="Medium">
+        Medium
+      </option>
+
+      <option value="Hard">
+        Hard
+      </option>
+    </select>
+  </div>
+</div>
+     <ProblemList
+  problems={filteredProblems}
+  setProblems={setProblems}
+/>
     </div>
   );
 }
