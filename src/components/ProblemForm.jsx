@@ -7,38 +7,108 @@ function ProblemForm({ problems, setProblems, user }) {
   const [topic, setTopic] = useState("");
   const [platform, setPlatform] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
 
-    if (!title.trim()) return;
-const tomorrow = new Date();
+//     if (!title.trim()) return;
+// const tomorrow = new Date();
 
-tomorrow.setDate(
-  tomorrow.getDate() + 1
-);
+// tomorrow.setDate(
+//   tomorrow.getDate() + 1
+// );
 
-const newProblem = {
-  title,
-  difficulty,
-  topic,
-  platform,
-  userId: user.uid,
-  solvedDate:
-    new Date().toISOString(),
-  nextRevision:
-    tomorrow.toISOString(),
-  revisionStage: 1,
-};
+// const newProblem = {
+//   title,
+//   difficulty,
+//   topic,
+//   platform,
+//   userId: user.uid,
+//   solvedDate:
+//     new Date().toISOString(),
+//   nextRevision:
+//     tomorrow.toISOString(),
+//   revisionStage: 1,
+// };
 
-    setProblems([...problems, newProblem]);
+//     setProblems([...problems, newProblem]);
 
-    await addProblem(newProblem);
+//     await addProblem(newProblem);
 
-    setTitle("");
-    setDifficulty("Easy");
-    setTopic("");
-    setPlatform("");
+//     setTitle("");
+//     setDifficulty("Easy");
+//     setTopic("");
+//     setPlatform("");
+//   };
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!title.trim()) return;
+
+  const formatTopic = (topic) => {
+    const value = topic.trim().toLowerCase();
+
+    const topics = {
+      dp: "DP",
+      bst: "BST",
+      lis: "LIS",
+      lcs: "LCS",
+      graph: "Graph",
+      tree: "Tree",
+      array: "Array",
+      stack: "Stack",
+      queue: "Queue",
+      greedy: "Greedy",
+      string: "String",
+      recursion: "Recursion",
+      backtracking: "Backtracking",
+      heap: "Heap",
+      trie: "Trie",
+      linkedlist: "LinkedList",
+      "linked list": "LinkedList",
+      math: "Math",
+      bitmask: "Bitmask",
+      binarysearch: "Binary Search",
+      "binary search": "Binary Search",
+    };
+
+    return (
+      topics[value] ||
+      value.charAt(0).toUpperCase() +
+        value.slice(1)
+    );
   };
+
+  const tomorrow = new Date();
+  tomorrow.setDate(
+    tomorrow.getDate() + 1
+  );
+
+  const newProblem = {
+    title: title.trim(),
+    difficulty,
+    topic: formatTopic(topic),
+    platform: platform.trim(),
+    userId: user.uid,
+    solvedDate:
+      new Date().toISOString(),
+    nextRevision:
+      tomorrow.toISOString(),
+    revisionStage: 1,
+  };
+
+  setProblems([
+    ...problems,
+    newProblem,
+  ]);
+
+  await addProblem(newProblem);
+
+  setTitle("");
+  setDifficulty("Easy");
+  setTopic("");
+  setPlatform("");
+};
 
   return (
     <div className="bg-slate-800 p-6 rounded-xl shadow-lg mb-8">
