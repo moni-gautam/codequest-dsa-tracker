@@ -11,19 +11,24 @@ function ProblemForm({ problems, setProblems, user }) {
     e.preventDefault();
 
     if (!title.trim()) return;
+const tomorrow = new Date();
 
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
+tomorrow.setDate(
+  tomorrow.getDate() + 1
+);
 
-    const newProblem = {
-      title,
-      difficulty,
-      topic,
-      platform,
-      userId: user.uid,
-      solvedDate: new Date().toISOString(),
-      nextRevision: tomorrow.toISOString(),
-    };
+const newProblem = {
+  title,
+  difficulty,
+  topic,
+  platform,
+  userId: user.uid,
+  solvedDate:
+    new Date().toISOString(),
+  nextRevision:
+    tomorrow.toISOString(),
+  revisionStage: 1,
+};
 
     setProblems([...problems, newProblem]);
 

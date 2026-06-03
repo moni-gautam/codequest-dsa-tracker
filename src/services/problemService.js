@@ -6,7 +6,7 @@ import {
   doc,
   query,
   where,
-  updateDoc
+  updateDoc,
 } from "firebase/firestore";
 
 import { db } from "../firebase/firebase";
@@ -46,6 +46,58 @@ export const updateProblem = async (
     doc(db, "problems", id),
     {
       difficulty,
+    }
+  );
+};
+
+export const markRevisionComplete = async (
+  id,
+  revisionStage
+) => {
+  let nextRevision = null;
+  let nextStage = revisionStage + 1;
+
+  const date = new Date();
+
+  // if (revisionStage === 1) {
+  //   date.setDate(date.getDate() + 7);
+
+  //   nextRevision =
+  //     date.toISOString();
+  // } else if (
+  //   revisionStage === 2
+  // ) {
+  //   date.setDate(date.getDate() + 30);
+
+  //   nextRevision =
+  //     date.toISOString();
+  // }
+ if (revisionStage === 1) {
+  date.setMinutes(
+    date.getMinutes() + 1
+  );
+
+  nextRevision =
+    date.toISOString();
+} else if (
+  revisionStage === 2
+) {
+  date.setMinutes(
+    date.getMinutes() + 1
+  );
+
+  nextRevision =
+    date.toISOString();
+}
+
+  
+
+  await updateDoc(
+    doc(db, "problems", id),
+    {
+      revisionStage:
+        nextStage,
+      nextRevision,
     }
   );
 };
