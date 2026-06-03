@@ -7,6 +7,7 @@ import StatsCard from "../components/StatsCard";
 import DifficultyChart from "../components/DifficultyChart";
 import RevisionPlanner from "../components/RevisionPlanner";
 import TopicChart from "../components/TopicChart";
+import RevisionQueue from "../components/RevisionQueue";
 
 function Dashboard({ user }) {
   const [problems, setProblems] = useState([]);
@@ -53,6 +54,7 @@ function Dashboard({ user }) {
         <StatsCard title="Hard" value={hardCount} />
         <StatsCard title="🔥 Streak" value={`${streak} Day`} />
       </div>
+      <RevisionQueue problems={problems} />
 
       {/* Analytics Section */}
       <div

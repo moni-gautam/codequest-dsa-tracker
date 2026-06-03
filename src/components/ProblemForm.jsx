@@ -12,14 +12,18 @@ function ProblemForm({ problems, setProblems, user }) {
 
     if (!title.trim()) return;
 
-   const newProblem = {
-  title,
-  difficulty,
-  topic,
-  platform,
-  userId: user.uid,
-  solvedDate: new Date().toISOString(),
-};
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const newProblem = {
+      title,
+      difficulty,
+      topic,
+      platform,
+      userId: user.uid,
+      solvedDate: new Date().toISOString(),
+      nextRevision: tomorrow.toISOString(),
+    };
 
     setProblems([...problems, newProblem]);
 
@@ -33,14 +37,9 @@ function ProblemForm({ problems, setProblems, user }) {
 
   return (
     <div className="bg-slate-800 p-6 rounded-xl shadow-lg mb-8">
-      <h2 className="text-2xl font-bold text-white mb-4">
-        Add New Problem
-      </h2>
+      <h2 className="text-2xl font-bold text-white mb-4">Add New Problem</h2>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-4"
-      >
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           placeholder="Problem Name"
@@ -51,9 +50,7 @@ function ProblemForm({ problems, setProblems, user }) {
 
         <select
           value={difficulty}
-          onChange={(e) =>
-            setDifficulty(e.target.value)
-          }
+          onChange={(e) => setDifficulty(e.target.value)}
           className="w-full p-3 rounded-lg bg-slate-700 text-white border border-slate-600"
         >
           <option value="Easy">Easy</option>
@@ -73,9 +70,7 @@ function ProblemForm({ problems, setProblems, user }) {
           type="text"
           placeholder="Platform"
           value={platform}
-          onChange={(e) =>
-            setPlatform(e.target.value)
-          }
+          onChange={(e) => setPlatform(e.target.value)}
           className="w-full p-3 rounded-lg bg-slate-700 text-white border border-slate-600"
         />
 
