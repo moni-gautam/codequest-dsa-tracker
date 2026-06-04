@@ -12,12 +12,11 @@ import InterviewScore from "../components/InterviewScore";
 import WeakTopics from "../components/WeakTopics";
 import Achievements from "../components/Achievements";
 
-
 function Dashboard({ user }) {
   const [problems, setProblems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [difficultyFilter, setDifficultyFilter] = useState("All");
-console.log(user.uid);
+  console.log(user.uid);
 
   useEffect(() => {
     const fetchProblems = async () => {
@@ -58,7 +57,6 @@ console.log(user.uid);
   return (
     <div className="min-h-screen bg-slate-900 text-white p-6">
       <Navbar user={user} />
-
       <h1 className="text-4xl font-bold mb-8">Dashboard</h1>
 
       {/* Stats Cards */}
@@ -73,7 +71,6 @@ console.log(user.uid);
         <StatsCard title="🔥 Streak" value={`${streak} Day`} />
       </div>
       <RevisionQueue problems={problems} />
-
       {/* Analytics Section */}
       <div
         style={{
@@ -129,19 +126,14 @@ console.log(user.uid);
           <TopicChart problems={problems} />
         </div>
       </div>
-
       <InterviewScore problems={problems} />
       <Achievements problems={problems} />
       <WeakTopics problems={problems} />
-
       {/* AI Planner */}
       <RevisionPlanner problems={problems} />
-
       {/* Add Problem Form */}
       <ProblemForm problems={problems} setProblems={setProblems} user={user} />
-
       {/* Problem List */}
-
       <div className="bg-slate-800 p-5 rounded-xl mb-6">
         <h2 className="text-2xl font-bold mb-4">🔍 Search & Filter</h2>
 

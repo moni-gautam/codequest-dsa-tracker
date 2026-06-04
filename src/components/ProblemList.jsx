@@ -4,16 +4,19 @@ import {
 } from "../services/problemService";
 
 function ProblemList({ problems, setProblems }) {
+
   const handleDelete = async (id) => {
     try {
+
       await deleteProblem(id);
 
-      setProblems(
-        problems.filter(
+      setProblems((prevProblems) =>
+        prevProblems.filter(
           (problem) =>
             problem.firestoreId !== id
         )
       );
+
     } catch (error) {
       console.log(error);
     }
@@ -24,13 +27,14 @@ function ProblemList({ problems, setProblems }) {
     difficulty
   ) => {
     try {
+
       await updateProblem(
         id,
         difficulty
       );
 
-      setProblems(
-        problems.map((problem) =>
+      setProblems((prevProblems) =>
+        prevProblems.map((problem) =>
           problem.firestoreId === id
             ? {
                 ...problem,
@@ -39,6 +43,7 @@ function ProblemList({ problems, setProblems }) {
             : problem
         )
       );
+
     } catch (error) {
       console.log(error);
     }
@@ -50,10 +55,13 @@ function ProblemList({ problems, setProblems }) {
     switch (difficulty) {
       case "Easy":
         return "bg-green-500";
+
       case "Medium":
         return "bg-yellow-500";
+
       case "Hard":
         return "bg-red-500";
+
       default:
         return "bg-gray-500";
     }
@@ -71,17 +79,20 @@ function ProblemList({ problems, setProblems }) {
         </div>
       ) : (
         <div className="grid md:grid-cols-2 gap-6">
+
           {problems.map((problem) => (
+
             <div
               key={problem.firestoreId}
               className="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-lg hover:scale-[1.02] hover:border-blue-500 transition-all duration-300"
             >
+
               {/* Title */}
               <h3 className="text-2xl font-bold text-white mb-4">
                 {problem.title}
               </h3>
 
-              {/* Difficulty Badge */}
+              {/* Difficulty */}
               <div className="mb-4">
                 <span
                   className={`px-3 py-1 rounded-full text-sm font-semibold text-white ${getDifficultyColor(
@@ -92,30 +103,52 @@ function ProblemList({ problems, setProblems }) {
                 </span>
               </div>
 
-              {/* Info */}
+              {/* Problem Details */}
               <div className="space-y-3 text-gray-300">
+
                 <p>
-                  📚 <span className="font-semibold">Topic:</span>{" "}
+                  📚{" "}
+                  <span className="font-semibold">
+                    Topic:
+                  </span>{" "}
                   {problem.topic}
                 </p>
 
                 <p>
-                  💻 <span className="font-semibold">Platform:</span>{" "}
+                  💻{" "}
+                  <span className="font-semibold">
+                    Platform:
+                  </span>{" "}
                   {problem.platform}
                 </p>
+
+                {problem.url && (
+                  <a
+                    href={problem.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-blue-400 hover:text-blue-300 hover:underline block font-semibold"
+                  >
+                    🔗 Open Problem
+                  </a>
+                )}
+
               </div>
 
               {/* Buttons */}
               <div className="flex gap-3 mt-6">
+
                 <button
                   onClick={() => {
+
                     const newDifficulty =
                       prompt(
                         "Enter new difficulty (Easy/Medium/Hard)",
                         problem.difficulty
                       );
 
-                    if (!newDifficulty) return;
+                    if (!newDifficulty)
+                      return;
 
                     handleUpdate(
                       problem.firestoreId,
@@ -137,9 +170,13 @@ function ProblemList({ problems, setProblems }) {
                 >
                   🗑 Delete
                 </button>
+
               </div>
+
             </div>
+
           ))}
+
         </div>
       )}
     </div>
