@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { addProblem } from "../services/problemService";
+import {
+  addProblem,
+  problemExists
+} from "../services/problemService";
 
 function ProblemForm({ problems, setProblems, user }) {
   const [title, setTitle] = useState("");
@@ -7,38 +10,7 @@ function ProblemForm({ problems, setProblems, user }) {
   const [topic, setTopic] = useState("");
   const [platform, setPlatform] = useState("");
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
 
-//     if (!title.trim()) return;
-// const tomorrow = new Date();
-
-// tomorrow.setDate(
-//   tomorrow.getDate() + 1
-// );
-
-// const newProblem = {
-//   title,
-//   difficulty,
-//   topic,
-//   platform,
-//   userId: user.uid,
-//   solvedDate:
-//     new Date().toISOString(),
-//   nextRevision:
-//     tomorrow.toISOString(),
-//   revisionStage: 1,
-// };
-
-//     setProblems([...problems, newProblem]);
-
-//     await addProblem(newProblem);
-
-//     setTitle("");
-//     setDifficulty("Easy");
-//     setTopic("");
-//     setPlatform("");
-//   };
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -80,9 +52,7 @@ const handleSubmit = async (e) => {
   };
 
   const tomorrow = new Date();
-  tomorrow.setDate(
-    tomorrow.getDate() + 1
-  );
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   const newProblem = {
     title: title.trim(),
@@ -90,25 +60,38 @@ const handleSubmit = async (e) => {
     topic: formatTopic(topic),
     platform: platform.trim(),
     userId: user.uid,
-    solvedDate:
-      new Date().toISOString(),
-    nextRevision:
-      tomorrow.toISOString(),
+    solvedDate: new Date().toISOString(),
+    nextRevision: tomorrow.toISOString(),
     revisionStage: 1,
   };
 
+  // CHECK DUPLICATE FIRST
+  const exists = await problemExists(
+    newProblem.title,
+    user.uid
+  );
+
+  if (exists) {
+    alert("Problem already exists!");
+    return;
+  }
+
+ 
+  await addProblem(newProblem);
+
+  
   setProblems([
     ...problems,
     newProblem,
   ]);
 
-  await addProblem(newProblem);
-
+ 
   setTitle("");
   setDifficulty("Easy");
   setTopic("");
   setPlatform("");
 };
+
 
   return (
     <div className="bg-slate-800 p-6 rounded-xl shadow-lg mb-8">

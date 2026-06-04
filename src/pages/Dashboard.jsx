@@ -12,15 +12,12 @@ import InterviewScore from "../components/InterviewScore";
 import WeakTopics from "../components/WeakTopics";
 import Achievements from "../components/Achievements";
 
+
 function Dashboard({ user }) {
   const [problems, setProblems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-const [difficultyFilter, setDifficultyFilter] = useState("All");
-
-      
-
-
-
+  const [difficultyFilter, setDifficultyFilter] = useState("All");
+console.log(user.uid);
 
   useEffect(() => {
     const fetchProblems = async () => {
@@ -48,20 +45,15 @@ const [difficultyFilter, setDifficultyFilter] = useState("All");
   const streak = solvedToday ? 1 : 0;
 
   const filteredProblems = problems.filter((problem) => {
-  const matchesSearch =
-    problem.title
+    const matchesSearch = problem.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
 
-  const matchesDifficulty =
-    difficultyFilter === "All" ||
-    problem.difficulty === difficultyFilter;
+    const matchesDifficulty =
+      difficultyFilter === "All" || problem.difficulty === difficultyFilter;
 
-  return (
-    matchesSearch &&
-    matchesDifficulty
-  );
-});
+    return matchesSearch && matchesDifficulty;
+  });
 
   return (
     <div className="min-h-screen bg-slate-900 text-white p-6">
@@ -151,52 +143,33 @@ const [difficultyFilter, setDifficultyFilter] = useState("All");
       {/* Problem List */}
 
       <div className="bg-slate-800 p-5 rounded-xl mb-6">
-  <h2 className="text-2xl font-bold mb-4">
-    🔍 Search & Filter
-  </h2>
+        <h2 className="text-2xl font-bold mb-4">🔍 Search & Filter</h2>
 
-  <div className="flex flex-col md:flex-row gap-4">
-    <input
-      type="text"
-      placeholder="Search problems..."
-      value={searchTerm}
-      onChange={(e) =>
-        setSearchTerm(e.target.value)
-      }
-      className="flex-1 bg-slate-700 text-white p-3 rounded-lg outline-none"
-    />
+        <div className="flex flex-col md:flex-row gap-4">
+          <input
+            type="text"
+            placeholder="Search problems..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="flex-1 bg-slate-700 text-white p-3 rounded-lg outline-none"
+          />
 
-    <select
-      value={difficultyFilter}
-      onChange={(e) =>
-        setDifficultyFilter(
-          e.target.value
-        )
-      }
-      className="bg-slate-700 text-white p-3 rounded-lg"
-    >
-      <option value="All">
-        All Difficulties
-      </option>
+          <select
+            value={difficultyFilter}
+            onChange={(e) => setDifficultyFilter(e.target.value)}
+            className="bg-slate-700 text-white p-3 rounded-lg"
+          >
+            <option value="All">All Difficulties</option>
 
-      <option value="Easy">
-        Easy
-      </option>
+            <option value="Easy">Easy</option>
 
-      <option value="Medium">
-        Medium
-      </option>
+            <option value="Medium">Medium</option>
 
-      <option value="Hard">
-        Hard
-      </option>
-    </select>
-  </div>
-</div>
-     <ProblemList
-  problems={filteredProblems}
-  setProblems={setProblems}
-/>
+            <option value="Hard">Hard</option>
+          </select>
+        </div>
+      </div>
+      <ProblemList problems={filteredProblems} setProblems={setProblems} />
     </div>
   );
 }

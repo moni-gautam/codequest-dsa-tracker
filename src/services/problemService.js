@@ -50,6 +50,41 @@ export const updateProblem = async (
   );
 };
 
+export const problemExists = async (
+  title,
+  userId
+) => {
+
+  const normalizedTitle =
+    title
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, " ");
+
+  const q = query(
+    collection(db, "problems"),
+    where("userId", "==", userId)
+  );
+
+  const snapshot =
+    await getDocs(q);
+
+  return snapshot.docs.some(doc => {
+
+    const existingTitle =
+      doc.data().title
+        ?.trim()
+        ?.toLowerCase()
+        ?.replace(/\s+/g, " ");
+
+    return (
+      existingTitle ===
+      normalizedTitle
+    );
+  });
+};
+
+
 export const markRevisionComplete = async (
   id,
   revisionStage
@@ -72,25 +107,8 @@ export const markRevisionComplete = async (
     nextRevision =
       date.toISOString();
   }
-//  if (revisionStage === 1) {
-//   date.setMinutes(
-//     date.getMinutes() + 1
-//   );
 
-//   nextRevision =
-//     date.toISOString();
-// } else if (
-//   revisionStage === 2
-// ) {
-//   date.setMinutes(
-//     date.getMinutes() + 1
-//   );
 
-//   nextRevision =
-//     date.toISOString();
-// }
-
-  
 
   await updateDoc(
     doc(db, "problems", id),
@@ -101,3 +119,5 @@ export const markRevisionComplete = async (
     }
   );
 };
+
+
