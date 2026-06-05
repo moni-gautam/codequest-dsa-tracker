@@ -52,20 +52,55 @@ Store:
 
 ### 🔗 Chrome Extension
 
-Solve a LeetCode problem and save it instantly.
+## 🧩 Chrome Extension Installation
 
-Workflow:
+### Step 1: Download Repository
 
-Solve Problem
-→ Open Extension
-→ Save To Dashboard
+```bash
+git clone https://github.com/moni-gautam/codequest-dsa-tracker.git
+```
 
-The extension automatically detects:
+### Step 2: Open Chrome Extensions
 
-* Problem Title
-* Difficulty
-* Topic
-* URL
+Navigate to:
+
+```text
+chrome://extensions
+```
+
+### Step 3: Enable Developer Mode
+
+Turn on **Developer Mode** in the top-right corner.
+
+### Step 4: Load Extension
+
+Click:
+
+```text
+Load Unpacked
+```
+
+Select:
+
+```text
+extension/dist
+```
+
+### Step 5: Connect Account
+
+1. Open CodeQuest Dashboard.
+2. Copy your UID from the navbar.
+3. Open the Chrome Extension.
+4. Paste the UID once.
+5. Click Save User ID.
+
+### Step 6: Start Tracking
+
+1. Open a solved LeetCode problem.
+2. Click the CodeQuest extension.
+3. Click **Save To Dashboard**.
+4. The problem is automatically added to your account.
+
 
 ---
 
@@ -221,13 +256,16 @@ Improve Interview Readiness
 
 ---
 
-## 📌 Future Improvements
+## 🚀 Future Improvements
 
-* Multi-platform support
-* Contest tracking
-* AI interview preparation
-* AI-generated revision questions
-* Community leaderboards
+* 🔄 **Automatic LeetCode Sync** — Enter a LeetCode username and import all solved problems automatically.
+* 🌐 **Multi-Platform Support** — Integrate LeetCode, Codeforces, AtCoder, HackerRank, and GeeksforGeeks.
+* 🔔 **Smart Revision Notifications** — Browser and email reminders for scheduled revisions.
+* 🤖 **AI Revision Questions** — Generate personalized revision and interview questions from solved problems.
+* 📱 **Mobile App** — Access CodeQuest on Android and iOS.
+* 🎤 **AI Mock Interviews** — Practice technical interviews with AI-generated feedback.
+* 📈 **Advanced Analytics** — Track learning trends, retention rates, and topic growth over time.
+
 
 ---
 
