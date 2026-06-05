@@ -14,6 +14,20 @@ Unlike traditional trackers, CodeQuest combines:
 * 🎯 Interview Readiness Scoring
 
 ---
+## 💡 Why I Built CodeQuest
+
+During my DSA and interview preparation journey, I noticed a recurring problem.
+
+I was solving coding problems regularly, but I wasn't revising them effectively. After a few weeks, many concepts, patterns, and solutions started fading from memory. I realized that solving problems alone was not enough—consistent revision was equally important.
+
+Most students focus heavily on solving new problems but often lack a structured revision system. As a result, they forget important concepts and struggle to retain what they have already learned.
+
+To solve this problem, I built **CodeQuest**—an AI-powered DSA progress tracker that not only records solved problems but also schedules revisions using spaced repetition, identifies weak topics, tracks interview readiness, and integrates directly with LeetCode through a Chrome Extension.
+
+My goal was simple:
+
+**Help students remember what they learn, not just track what they solve.**
+
 
 ## 🌟 Features
 
@@ -152,7 +166,7 @@ Deployment
 ### Clone Repository
 
 ```bash
-git clone <https://github.com/moni-gautam/codequest-dsa-tracker>
+git clone https://github.com/moni-gautam/codequest-dsa-tracker
 cd codequest
 ```
 
@@ -220,6 +234,11 @@ Improve Interview Readiness
 ## 👨‍💻 Author
 
 Built with ❤️ by Moni Gautam
+<img width="940" height="431" alt="image" src="https://github.com/user-attachments/assets/a1cbde6a-baa0-4ef0-99b9-317451a5f1e0" />
+<img width="935" height="793" alt="image" src="https://github.com/user-attachments/assets/07dce2cd-eec8-4d58-87ae-f62945544d93" />
+<img width="929" height="845" alt="image" src="https://github.com/user-attachments/assets/8e0d9da1-6ac1-4377-87e5-3c32a6c909f3" />
+<img width="939" height="608" alt="image" src="https://github.com/user-attachments/assets/7fa5cebf-8c27-4c0f-9b7d-c02b3e9494db" />
+<img width="931" height="408" alt="image" src="https://github.com/user-attachments/assets/cc1f1127-7bfb-4eb9-af8d-7dc099e0eba4" />
 
 
 
