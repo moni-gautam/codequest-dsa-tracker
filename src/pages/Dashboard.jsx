@@ -125,7 +125,7 @@ border: "1px solid rgba(234,179,8,0.2)",
             padding: "20px",
             borderRadius: "12px",
             width: "450px",
-            height: "420px",
+            height: "300px",
             boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
           }}
         >
