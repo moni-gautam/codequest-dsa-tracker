@@ -2,48 +2,38 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 function Navbar({ user }) {
-
   const handleLogout = async () => {
     await signOut(auth);
   };
 
   const copyUID = () => {
-    navigator.clipboard.writeText(
-      user?.uid
-    );
+    navigator.clipboard.writeText(user?.uid);
 
     alert("UID Copied ✅");
   };
 
   return (
-    <nav className="flex items-center justify-between bg-slate-800 border border-slate-700 rounded-xl px-6 py-4 mb-8 shadow-lg">
-
+    <nav
+      className="flex items-center justify-between bg-gradient-to-r
+from-violet-700
+via-purple-700
+to-indigo-700 border border-slate-700 rounded-xl px-6 py-4 mb-8 shadow-lg"
+    >
       {/* Left Side */}
       <div>
-        <h1 className="text-3xl font-bold text-white">
-          🚀 CodeQuest
-        </h1>
+        <h1 className="text-3xl font-bold text-white">🚀 CodeQuest</h1>
 
-        <p className="text-gray-400 text-sm">
-          AI-Powered DSA Progress Tracker
-        </p>
+        <p className="text-gray-400 text-sm">AI-Powered DSA Progress Tracker</p>
       </div>
 
       {/* Right Side */}
       <div className="flex items-center gap-4">
-
         <div className="text-right">
+          <p className="font-semibold text-white">{user?.displayName}</p>
 
-          <p className="font-semibold text-white">
-            {user?.displayName}
-          </p>
-
-          <p className="text-sm text-gray-400">
-            {user?.email}
-          </p>
+          <p className="text-sm text-gray-400">{user?.email}</p>
 
           <div className="flex items-center justify-end gap-2 mt-1">
-
             <span className="text-xs text-blue-400">
               UID: {user?.uid?.slice(0, 10)}...
             </span>
@@ -54,9 +44,7 @@ function Navbar({ user }) {
             >
               Copy
             </button>
-
           </div>
-
         </div>
 
         <img
@@ -71,9 +59,7 @@ function Navbar({ user }) {
         >
           Logout
         </button>
-
       </div>
-
     </nav>
   );
 }

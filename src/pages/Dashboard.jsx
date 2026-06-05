@@ -55,9 +55,17 @@ function Dashboard({ user }) {
   });
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white p-6">
+    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-slate-950 to-zinc-900 text-white p-6">
       <Navbar user={user} />
-      <h1 className="text-4xl font-bold mb-8">Dashboard</h1>
+    <div className="mb-10">
+  <h1 className="text-5xl font-extrabold text-white">
+    Welcome back 👋
+  </h1>
+
+  <p className="text-gray-400 mt-2 text-lg">
+    Keep your interview preparation on track.
+  </p>
+</div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
@@ -70,7 +78,10 @@ function Dashboard({ user }) {
         <StatsCard title="Hard" value={hardCount} />
         <StatsCard title="🔥 Streak" value={`${streak} Day`} />
       </div>
-      <RevisionQueue problems={problems} />
+     <RevisionQueue
+  problems={problems}
+  setProblems={setProblems}
+/>
       {/* Analytics Section */}
       <div
         style={{
