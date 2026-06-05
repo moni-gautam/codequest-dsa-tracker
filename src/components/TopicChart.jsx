@@ -33,15 +33,49 @@ function TopicChart({ problems }) {
       {
         label: "Problems Solved",
         data: Object.values(topicCounts),
-        backgroundColor: "#3b82f6",
+        backgroundColor: "#eab308",
+borderRadius: 8,
       },
     ],
   };
 
   const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-  };
+  responsive: true,
+  maintainAspectRatio: false,
+
+  plugins: {
+    legend: {
+      labels: {
+        color: "#f3f4f6",
+        font: {
+          weight: "bold",
+        },
+      },
+    },
+  },
+
+  scales: {
+    x: {
+      ticks: {
+        color: "#d1d5db",
+      },
+
+      grid: {
+        color: "rgba(255,255,255,0.05)",
+      },
+    },
+
+    y: {
+      ticks: {
+        color: "#d1d5db",
+      },
+
+      grid: {
+        color: "rgba(255,255,255,0.05)",
+      },
+    },
+  },
+};
 
   return (
     <div

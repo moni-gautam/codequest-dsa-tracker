@@ -27,7 +27,8 @@ function Achievements({ problems }) {
   }
 
   return (
-    <div className="bg-slate-800 p-6 rounded-xl mb-8">
+    <div className="bg-zinc-900
+border border-yellow-500/20 p-6 rounded-xl mb-8">
       <h2 className="text-2xl font-bold mb-4">
         🏆 Achievements
       </h2>
@@ -43,7 +44,8 @@ function Achievements({ problems }) {
             ) => (
               <div
                 key={index}
-                className="bg-slate-700 p-4 rounded-lg"
+                className="bg-black
+border border-yellow-500/20 p-4 rounded-lg"
               >
                 {achievement}
               </div>

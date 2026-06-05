@@ -55,15 +55,15 @@ function Dashboard({ user }) {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-slate-950 to-zinc-900 text-white p-6">
+   <div className="min-h-screen bg-black text-white p-6">
       <Navbar user={user} />
-    <div className="mb-10">
+<div className="mb-10">
   <h1 className="text-5xl font-extrabold text-white">
-    Welcome back 👋
+    Welcome back, {user?.displayName?.split(" ")[0]} 👋
   </h1>
 
-  <p className="text-gray-400 mt-2 text-lg">
-    Keep your interview preparation on track.
+  <p className="text-gray-400 text-lg mt-2">
+    Track progress, revise smarter, and crack interviews.
   </p>
 </div>
 
@@ -94,7 +94,8 @@ function Dashboard({ user }) {
       >
         <div
           style={{
-            backgroundColor: "#1e293b",
+           backgroundColor: "#18181b",
+border: "1px solid rgba(234,179,8,0.2)",
             padding: "20px",
             borderRadius: "12px",
             width: "450px",
@@ -102,12 +103,13 @@ function Dashboard({ user }) {
           }}
         >
           <h2
-            style={{
-              marginBottom: "20px",
-            }}
-          >
-            Difficulty Analytics
-          </h2>
+  style={{
+    color: "#eab308",
+    fontWeight: "bold",
+  }}
+>
+  📊 Difficulty Analytics
+</h2>
 
           <DifficultyChart
             easyCount={easyCount}
@@ -118,7 +120,8 @@ function Dashboard({ user }) {
 
         <div
           style={{
-            backgroundColor: "#1e293b",
+            backgroundColor: "#18181b",
+border: "1px solid rgba(234,179,8,0.2)",
             padding: "20px",
             borderRadius: "12px",
             width: "450px",
@@ -126,13 +129,14 @@ function Dashboard({ user }) {
             boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
           }}
         >
-          <h2
-            style={{
-              marginBottom: "20px",
-            }}
-          >
-            Topic Analytics
-          </h2>
+         <h2
+  style={{
+    color: "#eab308",
+    fontWeight: "bold",
+  }}
+>
+  📈 Topic Analytics
+</h2>
 
           <TopicChart problems={problems} />
         </div>
@@ -145,8 +149,15 @@ function Dashboard({ user }) {
       {/* Add Problem Form */}
       <ProblemForm problems={problems} setProblems={setProblems} user={user} />
       {/* Problem List */}
-      <div className="bg-slate-800 p-5 rounded-xl mb-6">
-        <h2 className="text-2xl font-bold mb-4">🔍 Search & Filter</h2>
+      <div className="
+bg-zinc-900
+border
+border-yellow-500/20
+p-5
+rounded-2xl
+mb-6
+">
+       <h2 className="text-2xl font-bold text-yellow-400 mb-4">🔍 Search & Filter</h2>
 
         <div className="flex flex-col md:flex-row gap-4">
           <input
@@ -154,13 +165,31 @@ function Dashboard({ user }) {
             placeholder="Search problems..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="flex-1 bg-slate-700 text-white p-3 rounded-lg outline-none"
+            className="
+flex-1
+bg-black
+border
+border-yellow-500/20
+text-white
+p-3
+rounded-lg
+outline-none
+focus:border-yellow-500
+"
           />
 
           <select
             value={difficultyFilter}
             onChange={(e) => setDifficultyFilter(e.target.value)}
-            className="bg-slate-700 text-white p-3 rounded-lg"
+            className="
+bg-black
+border
+border-yellow-500/20
+text-white
+p-3
+rounded-lg
+focus:border-yellow-500
+"
           >
             <option value="All">All Difficulties</option>
 

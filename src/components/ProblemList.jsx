@@ -1,37 +1,21 @@
-import {
-  deleteProblem,
-  updateProblem,
-} from "../services/problemService";
+import { deleteProblem, updateProblem } from "../services/problemService";
 
 function ProblemList({ problems, setProblems }) {
-
   const handleDelete = async (id) => {
     try {
-
       await deleteProblem(id);
 
       setProblems((prevProblems) =>
-        prevProblems.filter(
-          (problem) =>
-            problem.firestoreId !== id
-        )
+        prevProblems.filter((problem) => problem.firestoreId !== id),
       );
-
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleUpdate = async (
-    id,
-    difficulty
-  ) => {
+  const handleUpdate = async (id, difficulty) => {
     try {
-
-      await updateProblem(
-        id,
-        difficulty
-      );
+      await updateProblem(id, difficulty);
 
       setProblems((prevProblems) =>
         prevProblems.map((problem) =>
@@ -40,18 +24,15 @@ function ProblemList({ problems, setProblems }) {
                 ...problem,
                 difficulty,
               }
-            : problem
-        )
+            : problem,
+        ),
       );
-
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getDifficultyColor = (
-    difficulty
-  ) => {
+  const getDifficultyColor = (difficulty) => {
     switch (difficulty) {
       case "Easy":
         return "bg-green-500";
@@ -69,9 +50,7 @@ function ProblemList({ problems, setProblems }) {
 
   return (
     <div className="mt-10">
-      <h2 className="text-3xl font-bold text-white mb-6">
-        📚 Solved Problems
-      </h2>
+      <h2 className="text-3xl font-bold text-white mb-6">📚 Solved Problems</h2>
 
       {problems.length === 0 ? (
         <div className="bg-slate-800 rounded-xl p-6 text-center text-gray-400">
@@ -79,16 +58,24 @@ function ProblemList({ problems, setProblems }) {
         </div>
       ) : (
         <div className="grid md:grid-cols-2 gap-6">
-
           {problems.map((problem) => (
-
             <div
               key={problem.firestoreId}
-              className="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-lg hover:scale-[1.02] hover:border-blue-500 transition-all duration-300"
+              className="
+bg-zinc-900
+border border-yellow-500/20
+rounded-2xl
+p-6
+shadow-lg
+hover:scale-[1.02]
+hover:border-yellow-500/50
+hover:shadow-yellow-500/10
+transition-all
+duration-300
+"
             >
-
               {/* Title */}
-              <h3 className="text-2xl font-bold text-white mb-4">
+             <h3 className="text-2xl font-bold text-yellow-100 mb-4">
                 {problem.title}
               </h3>
 
@@ -96,7 +83,7 @@ function ProblemList({ problems, setProblems }) {
               <div className="mb-4">
                 <span
                   className={`px-3 py-1 rounded-full text-sm font-semibold text-white ${getDifficultyColor(
-                    problem.difficulty
+                    problem.difficulty,
                   )}`}
                 >
                   {problem.difficulty}
@@ -105,20 +92,13 @@ function ProblemList({ problems, setProblems }) {
 
               {/* Problem Details */}
               <div className="space-y-3 text-gray-300">
-
                 <p>
-                  📚{" "}
-                  <span className="font-semibold">
-                    Topic:
-                  </span>{" "}
+                  📚 <span className="font-semibold">Topic:</span>{" "}
                   {problem.topic}
                 </p>
 
                 <p>
-                  💻{" "}
-                  <span className="font-semibold">
-                    Platform:
-                  </span>{" "}
+                  💻 <span className="font-semibold">Platform:</span>{" "}
                   {problem.platform}
                 </p>
 
@@ -127,33 +107,25 @@ function ProblemList({ problems, setProblems }) {
                     href={problem.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-blue-400 hover:text-blue-300 hover:underline block font-semibold"
+                    className="text-yellow-400 hover:text-yellow-300 transition"
                   >
                     🔗 Open Problem
                   </a>
                 )}
-
               </div>
 
               {/* Buttons */}
               <div className="flex gap-3 mt-6">
-
                 <button
                   onClick={() => {
-
-                    const newDifficulty =
-                      prompt(
-                        "Enter new difficulty (Easy/Medium/Hard)",
-                        problem.difficulty
-                      );
-
-                    if (!newDifficulty)
-                      return;
-
-                    handleUpdate(
-                      problem.firestoreId,
-                      newDifficulty
+                    const newDifficulty = prompt(
+                      "Enter new difficulty (Easy/Medium/Hard)",
+                      problem.difficulty,
                     );
+
+                    if (!newDifficulty) return;
+
+                    handleUpdate(problem.firestoreId, newDifficulty);
                   }}
                   className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 rounded-lg transition"
                 >
@@ -161,22 +133,14 @@ function ProblemList({ problems, setProblems }) {
                 </button>
 
                 <button
-                  onClick={() =>
-                    handleDelete(
-                      problem.firestoreId
-                    )
-                  }
+                  onClick={() => handleDelete(problem.firestoreId)}
                   className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-lg transition"
                 >
                   🗑 Delete
                 </button>
-
               </div>
-
             </div>
-
           ))}
-
         </div>
       )}
     </div>

@@ -3,22 +3,21 @@ import { generateRevisionPlan } from "../services/geminiService";
 
 function RevisionPlanner({ problems }) {
   const [plan, setPlan] = useState("");
-  const [loading, setLoading] =
-    useState(false);
+  const [loading, setLoading] = useState(false);
 
-const handleGenerate = async () => {
-  console.log("Button clicked");
+  const handleGenerate = async () => {
+    console.log("Button clicked");
 
-  setLoading(true);
+    setLoading(true);
 
-  try {
-    const response = await generateRevisionPlan(problems);
+    try {
+      const response = await generateRevisionPlan(problems);
 
-    console.log("Gemini Response:", response);
+      console.log("Gemini Response:", response);
 
-    setPlan(response);
-  } catch (error) {
-  setPlan(`
+      setPlan(response);
+    } catch (error) {
+      setPlan(`
 Gemini is currently busy.
 
 Suggested Revision Plan:
@@ -31,23 +30,31 @@ Day 5 - Revision
 Day 6 - Mock Interview
 Day 7 - Contest
 `);
-}
+    }
 
-  setLoading(false);
-};
+    setLoading(false);
+  };
   return (
-    <div className="bg-slate-800 p-6 rounded-xl mb-8">
-      <h2 className="text-2xl font-bold text-white mb-4">
-        AI Revision Planner
-      </h2>
+    <div
+      className="
+  bg-gradient-to-r
+  from-violet-900/60
+  via-purple-900/50
+  to-indigo-900/60
+  border border-violet-500/20
+  p-6
+  rounded-2xl
+  mb-8
+  shadow-xl
+"
+    >
+      <h2 className="text-2xl font-bold mb-6">AI Revision Planner</h2>
 
       <button
         onClick={handleGenerate}
         className="bg-purple-600 hover:bg-purple-700 text-white px-5 py-3 rounded-lg"
       >
-        {loading
-          ? "Generating..."
-          : "Generate Revision Plan"}
+        {loading ? "Generating..." : "Generate Revision Plan"}
       </button>
 
       {plan && (

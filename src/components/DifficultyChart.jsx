@@ -21,32 +21,43 @@ function DifficultyChart({
   const data = {
     labels: ["Easy", "Medium", "Hard"],
     datasets: [
-      {
-        label: "Problems",
-        data: [
-          easyCount,
-          mediumCount,
-          hardCount,
-        ],
-        backgroundColor: [
-          "#22c55e",
-          "#f59e0b",
-          "#ef4444",
-        ],
-        borderWidth: 1,
-      },
+  {
+    data: [
+      easyCount,
+      mediumCount,
+      hardCount,
     ],
+
+    backgroundColor: [
+      "#22c55e",
+      "#eab308",
+      "#ef4444",
+    ],
+
+    borderColor: "#18181b",
+    borderWidth: 3,
+  },
+],
   };
 
   const options = {
-    responsive: true,
-    maintainAspectRatio: true,
-    plugins: {
-      legend: {
-        position: "top",
+  responsive: true,
+  maintainAspectRatio: true,
+
+  plugins: {
+    legend: {
+      position: "top",
+
+      labels: {
+        color: "#f3f4f6",
+        font: {
+          size: 14,
+          weight: "bold",
+        },
       },
     },
-  };
+  },
+};
 
   return (
     <div

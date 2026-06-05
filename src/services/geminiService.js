@@ -103,3 +103,49 @@ Better DP intuition and improved interview readiness.
 
   return result.response.text();
 };
+
+
+export const extractProblemDetails = async (url) => {
+  const prompt = `
+You are a DSA expert.
+
+Given this problem URL:
+
+${url}
+
+Extract:
+
+1. Problem Title
+2. Difficulty (Easy/Medium/Hard)
+3. Main Topic
+4. Platform
+
+Return ONLY valid JSON.
+
+Example:
+
+{
+  "title": "Two Sum",
+  "difficulty": "Easy",
+  "topic": "Array",
+  "platform": "LeetCode"
+}
+`;
+
+  const model = genAI.getGenerativeModel({
+    model: "gemini-2.5-flash-lite",
+  });
+
+  const result =
+    await model.generateContent(prompt);
+
+let text =
+  result.response.text();
+
+text = text
+  .replace(/```json/g, "")
+  .replace(/```/g, "")
+  .trim();
+
+return JSON.parse(text);
+};

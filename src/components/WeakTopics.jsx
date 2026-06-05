@@ -20,7 +20,7 @@ function WeakTopics({ problems }) {
   });
 
   return (
-    <div className="bg-slate-800 p-6 rounded-xl mb-8">
+    <div className="bg-zinc-900 border border-yellow-500/20 p-6 rounded-xl mb-8">
       <h2 className="text-2xl font-bold mb-6">
         🎯 Topic Mastery
       </h2>
@@ -68,7 +68,7 @@ function WeakTopics({ problems }) {
                   </span>
                 </div>
 
-                <div className="w-full bg-slate-700 rounded-full h-3">
+                <div className="w-full bg-zinc-700 rounded-full h-3">
                   <div
                     className={`${color} h-3 rounded-full transition-all duration-500`}
                     style={{

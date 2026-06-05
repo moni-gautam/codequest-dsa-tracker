@@ -38,11 +38,35 @@ function RevisionQueue({ problems, setProblems }) {
   };
 
   return (
-    <div className="bg-slate-800 p-6 rounded-xl mb-8">
-      <h2 className="text-2xl font-bold mb-4">📅 Revision Due Today</h2>
+    <div
+      className="
+  bg-zinc-900
+border border-yellow-500/20
+  border border-violet-500/20
+  p-6
+  rounded-2xl
+  mb-8
+  shadow-xl
+"
+    >
+      <h2 className="text-3xl font-bold text-yellow-400 mb-4">
+        📅 Revision Due Today
+      </h2>
 
       {dueProblems.length === 0 ? (
-        <p className="text-gray-400">No revisions due today.</p>
+        // <p className="text-gray-400">No revisions due today.</p>
+
+        <div className="text-center py-12">
+          <div className="text-6xl mb-4">🏆</div>
+
+          <h3 className="text-2xl font-bold text-yellow-400">
+            All Revisions Complete
+          </h3>
+
+          <p className="text-gray-400 mt-2">
+            Great work! Nothing to revise today.
+          </p>
+        </div>
       ) : (
         <div className="space-y-3">
           {dueProblems.map((problem) => (
@@ -60,12 +84,35 @@ function RevisionQueue({ problems, setProblems }) {
                 </p>
               </div>
 
-              <button
-                onClick={() => handleRevision(problem)}
-                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-semibold"
-              >
-                Mark Revised
-              </button>
+              <div className="flex gap-2">
+                {problem.url && (
+                  <a
+                    href={problem.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="
+      bg-blue-600
+      hover:bg-blue-700
+      text-white
+      px-4
+      py-2
+      rounded-lg
+      font-semibold
+      "
+                  >
+                    🔗 Revise Now
+                  </a>
+                )}
+
+                <a
+                  href={problem.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => handleRevision(problem)}
+                >
+                  🚀 Revise Now
+                </a>
+              </div>
             </div>
           ))}
         </div>

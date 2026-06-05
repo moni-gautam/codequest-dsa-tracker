@@ -1,142 +1,187 @@
+
 import { useState } from "react";
 import {
   addProblem,
-  problemExists
+  problemExists,
 } from "../services/problemService";
 
-function ProblemForm({ problems, setProblems, user }) {
-  const [title, setTitle] = useState("");
-  const [difficulty, setDifficulty] = useState("Easy");
-  const [topic, setTopic] = useState("");
-  const [platform, setPlatform] = useState("");
+import {
+  extractProblemDetails,
+} from "../services/geminiService";
 
+function ProblemForm({
+  problems,
+  setProblems,
+  user,
+}) {
+  const [url, setUrl] =
+    useState("");
 
+  const handleSubmit = async (
+    e
+  ) => {
+    e.preventDefault();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    if (!url.trim()) {
+      alert(
+        "Enter problem URL"
+      );
+      return;
+    }
 
-  if (!title.trim()) return;
+    try {
+      const data =
+        await extractProblemDetails(
+          url
+        );
 
-  const formatTopic = (topic) => {
-    const value = topic.trim().toLowerCase();
+      const tomorrow =
+        new Date();
 
-    const topics = {
-      dp: "DP",
-      bst: "BST",
-      lis: "LIS",
-      lcs: "LCS",
-      graph: "Graph",
-      tree: "Tree",
-      array: "Array",
-      stack: "Stack",
-      queue: "Queue",
-      greedy: "Greedy",
-      string: "String",
-      recursion: "Recursion",
-      backtracking: "Backtracking",
-      heap: "Heap",
-      trie: "Trie",
-      linkedlist: "LinkedList",
-      "linked list": "LinkedList",
-      math: "Math",
-      bitmask: "Bitmask",
-      binarysearch: "Binary Search",
-      "binary search": "Binary Search",
-    };
+      tomorrow.setDate(
+        tomorrow.getDate() + 1
+      );
 
-    return (
-      topics[value] ||
-      value.charAt(0).toUpperCase() +
-        value.slice(1)
-    );
+      const newProblem = {
+        title:
+          data.title ||
+          "Unknown Problem",
+
+        difficulty:
+          data.difficulty ||
+          "Easy",
+
+        topic:
+          data.topic ||
+          "Unknown",
+
+        platform:
+          data.platform ||
+          "LeetCode",
+
+        url: url.trim(),
+
+        userId:
+          user.uid,
+
+        solvedDate:
+          new Date().toISOString(),
+
+        nextRevision:
+          tomorrow.toISOString(),
+
+        revisionStage: 1,
+      };
+
+      const exists =
+        await problemExists(
+          newProblem.title,
+          user.uid
+        );
+
+      if (exists) {
+        alert(
+          "Problem already exists!"
+        );
+        return;
+      }
+
+      await addProblem(
+        newProblem
+      );
+
+      setProblems([
+        ...problems,
+        newProblem,
+      ]);
+
+      setUrl("");
+
+      alert(
+        "Problem Added 🚀"
+      );
+
+    } catch (error) {
+      console.log(error);
+
+      alert(
+        "Could not extract problem details."
+      );
+    }
   };
-
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
-  const newProblem = {
-    title: title.trim(),
-    difficulty,
-    topic: formatTopic(topic),
-    platform: platform.trim(),
-    userId: user.uid,
-    solvedDate: new Date().toISOString(),
-    nextRevision: tomorrow.toISOString(),
-    revisionStage: 1,
-  };
-
-  // CHECK DUPLICATE FIRST
-  const exists = await problemExists(
-    newProblem.title,
-    user.uid
-  );
-
-  if (exists) {
-    alert("Problem already exists!");
-    return;
-  }
-
- 
-  await addProblem(newProblem);
-
-  
-  setProblems([
-    ...problems,
-    newProblem,
-  ]);
-
- 
-  setTitle("");
-  setDifficulty("Easy");
-  setTopic("");
-  setPlatform("");
-};
-
 
   return (
-    <div className="bg-slate-800 p-6 rounded-xl shadow-lg mb-8">
-      <h2 className="text-2xl font-bold text-white mb-4">Add New Problem</h2>
+    <div
+      className="
+      bg-zinc-900
+      border
+      border-yellow-500/20
+      p-6
+      rounded-2xl
+      shadow-lg
+      mb-8
+    "
+    >
+      <h2
+        className="
+        text-2xl
+        font-bold
+        text-yellow-400
+        mb-4
+      "
+      >
+        🚀 Add Problem from URL
+      </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <p className="text-gray-400 mb-4">
+        Paste a LeetCode URL and
+        CodeQuest will
+        automatically detect
+        the problem details.
+      </p>
+
+      <form
+        onSubmit={
+          handleSubmit
+        }
+        className="space-y-4"
+      >
         <input
           type="text"
-          placeholder="Problem Name"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-3 rounded-lg bg-slate-700 text-white border border-slate-600"
-        />
-
-        <select
-          value={difficulty}
-          onChange={(e) => setDifficulty(e.target.value)}
-          className="w-full p-3 rounded-lg bg-slate-700 text-white border border-slate-600"
-        >
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
-        </select>
-
-        <input
-          type="text"
-          placeholder="Topic"
-          value={topic}
-          onChange={(e) => setTopic(e.target.value)}
-          className="w-full p-3 rounded-lg bg-slate-700 text-white border border-slate-600"
-        />
-
-        <input
-          type="text"
-          placeholder="Platform"
-          value={platform}
-          onChange={(e) => setPlatform(e.target.value)}
-          className="w-full p-3 rounded-lg bg-slate-700 text-white border border-slate-600"
+          placeholder="https://leetcode.com/problems/two-sum/"
+          value={url}
+          onChange={(e) =>
+            setUrl(
+              e.target.value
+            )
+          }
+          className="
+            w-full
+            p-3
+            rounded-lg
+            bg-black
+            border
+            border-yellow-500/20
+            text-white
+            focus:outline-none
+            focus:border-yellow-500
+          "
         />
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg"
+          className="
+            w-full
+            bg-yellow-500
+            hover:bg-yellow-400
+            text-black
+            font-semibold
+            py-3
+            rounded-lg
+            transition
+          "
         >
-          Add Problem
+          🚀 Add Problem
         </button>
       </form>
     </div>

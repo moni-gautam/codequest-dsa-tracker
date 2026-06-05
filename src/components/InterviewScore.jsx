@@ -41,12 +41,13 @@ function InterviewScore({ problems }) {
   );
 
   return (
-    <div className="bg-slate-800 p-6 rounded-xl mb-8">
+    <div className="bg-zinc-900
+border border-yellow-500/20 p-6 rounded-xl mb-8">
       <h2 className="text-2xl font-bold mb-4">
         🎯 Interview Readiness
       </h2>
 
-      <div className="text-5xl font-bold text-blue-400">
+      <div className="text-5xl font-bold text-yellow-400">
         {readiness}%
       </div>
 
