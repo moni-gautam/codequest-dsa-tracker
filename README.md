@@ -1,4 +1,5 @@
 # 🚀 CodeQuest
+https://codequest-dsa-tracker.vercel.app
 
 ### AI-Powered DSA Progress Tracker & Smart Revision Assistant
 
@@ -151,7 +152,7 @@ Deployment
 ### Clone Repository
 
 ```bash
-git clone <repo-url>
+git clone <https://github.com/moni-gautam/codequest-dsa-tracker>
 cd codequest
 ```
 
