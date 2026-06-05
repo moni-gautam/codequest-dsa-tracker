@@ -1,120 +1,226 @@
 # 🚀 CodeQuest
 
-An AI-Powered DSA Progress Tracker that helps students track solved problems, analyze strengths and weaknesses, and revise using a spaced repetition system.
+### AI-Powered DSA Progress Tracker & Smart Revision Assistant
 
-## 🌐 Live Demo
+CodeQuest helps students track solved coding problems, identify weak topics, plan revisions using spaced repetition, and stay interview-ready.
 
-https://codequest-dsa-tracker.vercel.app
+Unlike traditional trackers, CodeQuest combines:
+
+* 📊 Progress Analytics
+* 🧠 AI Revision Planning
+* 🔁 Spaced Repetition Revision System
+* 🔗 Browser Extension Integration
+* 🎯 Interview Readiness Scoring
 
 ---
 
-## ✨ Features
+## 🌟 Features
 
-### 🔐 Authentication
+### 📈 Problem Tracking
 
-* Google Sign-In with Firebase Authentication
-* User-specific dashboards
+Track coding problems from:
 
-### 📚 Problem Management
+* LeetCode
+* Coding Platforms
+* Manual URL Submission
 
-* Add DSA problems
-* Edit difficulty
-* Delete problems
-* Track platform and topic
+Store:
+
+* Problem Title
+* Difficulty
+* Topic
+* Platform
+* Revision Schedule
+* Original Problem Link
+
+---
+
+### 🔗 Chrome Extension
+
+Solve a LeetCode problem and save it instantly.
+
+Workflow:
+
+Solve Problem
+→ Open Extension
+→ Save To Dashboard
+
+The extension automatically detects:
+
+* Problem Title
+* Difficulty
+* Topic
+* URL
+
+---
+
+### 🤖 AI URL Extraction
+
+Paste a LeetCode URL.
+
+CodeQuest automatically extracts:
+
+* Problem Title
+* Difficulty
+* Topic
+* Platform
+
+using Google Gemini AI.
+
+No manual form filling required.
+
+---
+
+### 🔁 Smart Revision Planner
+
+Every solved problem enters a revision cycle:
+
+Day 1
+→ Day 7
+→ Day 30
+
+Designed using spaced repetition principles.
+
+---
 
 ### 📊 Analytics Dashboard
 
+Track:
+
 * Total Problems Solved
-* Easy / Medium / Hard Breakdown
-* Difficulty Distribution Pie Chart
-* Topic Analytics Chart
-
-### 🎯 Learning Features
-
-* Topic Mastery Analysis
-* Weak Topics Detection
-* Interview Readiness Score
-* Daily Streak Tracker
-
-### 🔄 Revision System
-
+* Difficulty Distribution
+* Topic Distribution
 * Revision Queue
-* Multi-Stage Spaced Repetition
-* Automatic Revision Scheduling
-
-### 🔍 Search & Filter
-
-* Search problems by title
-* Filter by difficulty
+* Interview Readiness
 
 ---
 
-## 🛠️ Tech Stack
+### 🎯 Weak Topic Detection
 
-### Frontend
+Automatically identifies areas needing improvement.
 
-* React
-* Vite
+Examples:
+
+* Dynamic Programming
+* Graphs
+* Trees
+* Greedy
+
+---
+
+### 🏆 Achievements System
+
+Gamified progress tracking:
+
+* First Problem Solved
+* 10 Problems Milestone
+* 50 Problems Milestone
+* Revision Streaks
+
+---
+
+## 🛠 Tech Stack
+
+Frontend
+
+* React.js
 * Tailwind CSS
 * Chart.js
 
-### Backend
+Backend
 
+* Firebase Firestore
 * Firebase Authentication
-* Cloud Firestore
 
-### Deployment
+AI
+
+* Google Gemini API
+
+Browser Extension
+
+* Chrome Extension (Manifest V3)
+
+Deployment
 
 * Vercel
 
 ---
 
-## 📸 Screenshots
-
-*Add screenshots of your dashboard here.*
-
----
-
 ## 🚀 Installation
 
-Clone the repository:
+### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/codequest-dsa-tracker.git
+git clone <repo-url>
+cd codequest
 ```
 
-Install dependencies:
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-Run locally:
+### Run Locally
 
 ```bash
 npm run dev
 ```
 
+### Build
+
+```bash
+npm run build
+```
+
 ---
 
-## 📈 Future Improvements
+## 🔗 Extension Setup
 
-* AI Revision Planner (Gemini)
-* Achievement System
-* Contest Tracker
-* Mobile Responsive UI Improvements
+1. Build the extension.
+2. Open Chrome Extensions.
+3. Enable Developer Mode.
+4. Click Load Unpacked.
+5. Select the extension folder.
+6. Copy your UID from CodeQuest.
+7. Paste UID into extension.
+8. Start tracking problems.
+
+---
+
+## 🎥 Demo Workflow
+
+Login
+↓
+Solve LeetCode Problem
+↓
+Open Extension
+↓
+Save To Dashboard
+↓
+Track Progress
+↓
+Revise Smarter
+↓
+Improve Interview Readiness
+
+---
+
+## 📌 Future Improvements
+
+* Multi-platform support
+* Contest tracking
+* AI interview preparation
+* AI-generated revision questions
+* Community leaderboards
 
 ---
 
 ## 👨‍💻 Author
 
-Built by Moni Gautam.
+Built with ❤️ by Moni Gautam
 
-<img width="943" height="586" alt="image" src="https://github.com/user-attachments/assets/a8a73ebc-4f0f-4677-bfd8-fe0d09d63088" />
-<img width="893" height="384" alt="image" src="https://github.com/user-attachments/assets/3a7447ee-253c-4c6c-8e98-d8b046ddb100" />
-<img width="909" height="593" alt="image" src="https://github.com/user-attachments/assets/3450f9eb-7db6-4732-80a2-41372bf4f814" />
-<img width="889" height="600" alt="image" src="https://github.com/user-attachments/assets/2147b362-f71a-4539-bd54-482fec2ab825" />
-<img width="921" height="816" alt="image" src="https://github.com/user-attachments/assets/16eec5f5-4760-4f44-9142-372b0b2051b8" />
+
 
 
 
