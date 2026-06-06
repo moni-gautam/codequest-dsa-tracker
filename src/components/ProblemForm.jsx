@@ -96,14 +96,8 @@ function ProblemForm({
       ]);
 
       setUrl("");
-
-      alert(
-        "Problem Added 🚀"
-      );
-
     } catch (error) {
       console.log(error);
-
       alert(
         "Could not extract problem details."
       );

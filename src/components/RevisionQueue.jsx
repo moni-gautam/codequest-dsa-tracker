@@ -110,7 +110,6 @@ border border-yellow-500/20
                   rel="noreferrer"
                   onClick={() => handleRevision(problem)}
                 >
-                  🚀 Revise Now
                 </a>
               </div>
             </div>

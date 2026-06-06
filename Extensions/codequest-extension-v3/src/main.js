@@ -92,8 +92,6 @@ document.getElementById("saveUserBtn").addEventListener("click", () => {
 
   chrome.storage.local.set({ userId }, () => {
     document.getElementById("uidSection").style.display = "none";
-
-    alert("User ID Saved ✅");
   });
 });
 
